@@ -1,12 +1,12 @@
-# 🔥 Sistema Inteligente de Predicción de Incendios Forestales
+# Sistema Inteligente de Predicción de Incendios Forestales
 
 Sistema de monitoreo y predicción de incendios forestales en tiempo real para los estados de Morelos y Estado de México, desarrollado durante el hackathon U-Hacks.
 
-🌐 **Demo en vivo:** [https://erickzghz-crypto.github.io/mapa-incendios-pruebas/](https://erickzghz-crypto.github.io/mapa-incendios-pruebas/)
+ **Demo en vivo:** [https://erickzghz-crypto.github.io/mapa-incendios-pruebas/](https://erickzghz-crypto.github.io/mapa-incendios-pruebas/)
 
 ---
 
-## 🌎 Problema que resuelve
+## Problema que resuelve
 
 México enfrenta miles de incendios forestales cada año, afectando Áreas Naturales Protegidas, ecosistemas y comunidades. La detección tardía y la falta de predicción preventiva agravan el impacto ambiental y social.
 
@@ -17,7 +17,7 @@ Este sistema combina datos satelitales, meteorológicos y geoespaciales para:
 
 ---
 
-## 🏗️ Arquitectura del sistema
+## Arquitectura del sistema
 
 ```
 NASA FIRMS + Open-Meteo + GeoJSON locales
@@ -25,14 +25,14 @@ NASA FIRMS + Open-Meteo + GeoJSON locales
         pipeline.py  (monitoreo diario)
             ↓
       Azure SQL Server
-      ├── incendios_activos_morelos
-      ├── incendios_activos_edomex
-      └── predicciones_riesgo
+       incendios_activos_morelos
+       incendios_activos_edomex
+       predicciones_riesgo
             ↓
-    ┌───────────────────────┐
-    │   Modelo ML (fase1-3) │    Power BI Dashboard
-    │   Random Forest + SHAP│ ←─ Monitoreo + Predicción
-    └───────────────────────┘
+    
+       Modelo ML (fase1-3)     Power BI Dashboard
+       Random Forest + SHAP ← Monitoreo + Predicción
+    
             ↓
     Azure Static Web App
 ```
@@ -54,7 +54,7 @@ NASA FIRMS + Open-Meteo + GeoJSON locales
 
 ---
 
-## 📊 Machine Learning
+## Machine Learning
 
 Se utilizó un modelo **Random Forest** con explicabilidad **SHAP**:
 
@@ -68,26 +68,26 @@ SHAP permite explicar cada predicción individualmente:
 
 ---
 
-## 🗂️ Estructura del proyecto
+## Estructura del proyecto
 
 ```
 proyecto/
-├── data/                    # GeoJSON (no incluidos en repo, ver sección de datos)
-├── pipeline/
-│   ├── pipeline.py          # Monitoreo diario de incendios activos
-│   ├── fase1_preparar_datos.py   # Preparación del dataset de entrenamiento
-│   ├── fase2_entrenar_modelo.py  # Entrenamiento Random Forest + SHAP
-│   └── fase3_predecir.py         # Generación de predicciones de riesgo
-├── web/
-│   └── index.html           # Página web del proyecto
-├── powerbi/                 # Dashboard de Power BI
-├── .gitignore
-└── README.md
+ data/                    # GeoJSON (no incluidos en repo, ver sección de datos)
+ pipeline/
+    pipeline.py          # Monitoreo diario de incendios activos
+    fase1_preparar_datos.py   # Preparación del dataset de entrenamiento
+    fase2_entrenar_modelo.py  # Entrenamiento Random Forest + SHAP
+    fase3_predecir.py         # Generación de predicciones de riesgo
+ web/
+    index.html           # Página web del proyecto
+ powerbi/                 # Dashboard de Power BI
+ .gitignore
+ README.md
 ```
 
 ---
 
-## 🚀 Cómo correrlo
+## Cómo correrlo
 
 ### 1. Instalar dependencias
 
@@ -138,7 +138,7 @@ python pipeline/fase3_predecir.py
 
 ---
 
-## 👥 Equipo
+## Equipo
 
 | Nombre |
 |---|
@@ -149,6 +149,6 @@ python pipeline/fase3_predecir.py
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 MIT License — libre para usar, modificar y distribuir.
