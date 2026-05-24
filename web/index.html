@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Monitoreo - Hackaton 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Paleta de colores Dark Mode */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #ef4444; /* Rojo emergencia */
+            --accent-glow: rgba(239, 68, 68, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0b1120; /* Tono base súper oscuro */
+            
+            /* Efecto de líneas topográficas y órbitas satelitales usando CSS puro */
+            background-image: 
+                /* Ondas desde la izquierda */
+                repeating-radial-gradient(circle at -10% 50%, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 60px),
+                /* Ondas desde la derecha abajo (con un toque azulado técnico) */
+                repeating-radial-gradient(circle at 110% 90%, rgba(56, 189, 248, 0.03) 0, rgba(56, 189, 248, 0.03) 1px, transparent 1px, transparent 90px),
+                /* Gradiente de fondo para dar profundidad */
+                radial-gradient(circle at 50% 0%, #1e293b 0%, #0b1120 100%);
+            
+            background-attachment: fixed;
+        }
+
+        /* Barra de navegación superior */
+        header {
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .header-titles h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header-titles p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Indicador de Estado (Puntito rojo parpadeante) */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .pulse {
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            animation: blink 1.5s infinite alternate;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Contenedor principal con efecto "Glassmorphism" oscuro y borde metálico */
+        .dashboard-container {
+            width: 95%;
+            max-width: 1400px;
+            
+            /* Fondo tipo cristal oscuro ahumado */
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            
+            border-radius: 16px;
+            padding: 0; 
+            
+            /* Sombra profunda y un borde interior blanco sutil para simular metal/cristal */
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.7), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.15),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease-out;
+            overflow: hidden; 
+        }
+
+        /* Contenedor que actúa como "cortadora" */
+        .iframe-crop-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            height: 75vh;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: transparent; 
+        }
+
+        /* Pie de página */
+        footer {
+            margin-top: auto;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-titles">
+            <h1>Sistema de Inteligencia Espacial</h1>
+            <p>Centro de Control - Riesgo de Incendios</p>
+        </div>
+        <div class="status-badge">
+            <div class="pulse"></div>
+            Monitoreo en Tiempo Real
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <div class="iframe-crop-wrapper">
+            <iframe title="proyecto_final_version_uno" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiM2Q3OGY5MjctMjkzZi00MzMyLTk3MDQtY2NkMTcxNzc0NmQ5IiwidCI6ImY5NGJmNGQ5LTgwOTctNDc5NC1hZGY2LWE1NDY2Y2EyODU2MyIsImMiOjR9&pageNavigation=true" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        Desarrollado para el Hackaton 2026 | Equipo de Ingeniería
+    </footer>
+
+</body>
+</html>
